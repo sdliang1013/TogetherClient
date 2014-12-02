@@ -39,7 +39,6 @@ public class SwimActivity extends Activity implements ViewFactory, OnTouchListen
 
 		// 加载SimpleAdapter到ListView中
 		mListView.setAdapter(simpleAdapter);
-		
 		mListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
