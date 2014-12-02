@@ -1,0 +1,18 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/margin_vertical_common"
+    android:paddingLeft="@dimen/margin_horizontal_common"
+    android:paddingRight="@dimen/margin_horizontal_common"
+    android:paddingTop="@dimen/margin_vertical_common"
+    tools:context=".swim.SwimActivity" >
+
+    <ListView android:id="@+id/listview_swim" 
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content" 
+        android:divider="#5A626F">
+　    </ListView>
+
+</LinearLayout>
