@@ -2,6 +2,7 @@ package com.caul.android.togetherclient;
 
 import android.app.Activity;
 
+import com.caul.android.togetherclient.logon.LogonActivity;
 import com.caul.android.togetherclient.pinche.PincheActivity;
 import com.caul.android.togetherclient.swim.SwimActivity;
 
@@ -12,7 +13,7 @@ public enum MainTextView {
 	BIKE(R.id.tv5,0XFFD47756,0xFFFFFFFF, "单车", Activity.class),//R.layout.activity_bike), 
 	PINCHE(R.id.tv6,0XFF5A626F,0xFFFFFFFF, "拼车", PincheActivity.class),//R.layout.activity_pinche), 
 	FILM(R.id.tv7,0XFFEE7434,0xFFFFFFFF, "电影", Activity.class),//R.layout.activity_film), 
-	CUSTOM(R.id.tv8,0XFF3EADEB,0xFFFFFFFF, "自定义", Activity.class);//R.layout.activity_custom);
+	CUSTOM(R.id.tv8,0XFF3EADEB,0xFFFFFFFF, "登陆", LogonActivity.class);//R.layout.activity_custom);
 
 	private final int id;
 	private final String name;

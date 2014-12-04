@@ -26,13 +26,15 @@
         </activity>
         <!-- 配置跳转activity -->
         <activity
-            android:name="com.caul.android.togetherclient.swim.SwimActivity"
+            android:name=".swim.SwimActivity"
             android:label="@string/title_swim" >
         </activity>
         <activity
-            android:name="com.caul.android.togetherclient.pinche.PincheActivity"
+            android:name=".pinche.PincheActivity"
             android:label="@string/title_pinche" >
         </activity>
+        <activity android:name=".logon.LogonActivity"
+            android:label="@string/title_logon"></activity>
     </application>
 
 </manifest>

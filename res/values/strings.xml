@@ -6,5 +6,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_swim">游  泳</string>
     <string name="title_pinche">拼  车</string>
+    <string name="title_logon">登  陆</string>
 
 </resources>

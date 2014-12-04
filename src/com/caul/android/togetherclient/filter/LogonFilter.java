@@ -20,7 +20,7 @@ public class LogonFilter implements CaulHttpFilter {
 			IOException {
 		String token = CaulAppCache.getInstance().getAttribute(Constant.APP_CACHE_KEY_TOKEN, String.class);
 		if (StringUtils.isEmpty(token)) {
-			throw new CaulException.Builder().errorCode(ExceptionCode.LOGON_NOTLOGON).message("您未登录,请先登陆").builder();
+//			throw new CaulException.Builder().errorCode(ExceptionCode.LOGON_NOTLOGON).message("您未登录,请先登陆").builder();
 		}
 		chain.next(request, response);
 	}

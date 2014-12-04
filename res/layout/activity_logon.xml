@@ -1,0 +1,81 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/margin_vertical_common"
+    android:paddingLeft="@dimen/margin_horizontal_common"
+    android:paddingRight="@dimen/margin_horizontal_common"
+    android:paddingTop="@dimen/margin_vertical_common"
+    tools:context=".MainActivity" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+
+        <TextView
+            android:id="@+id/label_userName"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_margin="@dimen/margin_horizontal_common"
+            android:background="#FF000000"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="用户名"
+            android:textColor="#FFFFFFFF"/>
+
+        <EditText
+            android:id="@+id/text_userName"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName" >
+
+            <requestFocus />
+        </EditText>
+        
+    </LinearLayout>
+
+     <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+
+        <TextView
+            android:id="@+id/label_pwd"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_margin="@dimen/margin_horizontal_common"
+            android:background="#FF000000"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="密码"
+            android:textColor="#FFFFFFFF"/>
+
+        <EditText
+            android:id="@+id/text_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPassword" >
+
+            <requestFocus />
+        </EditText>
+        
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+		
+        <Button android:id="@+id/btn_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="提交"/>
+        
+    </LinearLayout>
+
+</LinearLayout>
