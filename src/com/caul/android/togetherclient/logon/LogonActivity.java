@@ -1,5 +1,6 @@
 package com.caul.android.togetherclient.logon;
 
+import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 
 import android.app.Activity;
@@ -45,31 +46,39 @@ public class LogonActivity extends Activity implements ViewFactory,
 	public void onClick(View view) {
 		EditText unEdit = (EditText) this.findViewById(R.id.text_userName);
 		EditText pwdEdit = (EditText) this.findViewById(R.id.text_pwd);
-		String un = unEdit.getText().toString();
-		String pwd = pwdEdit.getText().toString();
-		Toast.makeText(
-				this,
-				"用户名:" + un + ";密码:"
-						+ pwd, Toast.LENGTH_SHORT)
+		final String un = unEdit.getText().toString();
+		final String pwd = pwdEdit.getText().toString();
+		Toast.makeText(this, "用户名:" + un + ";密码:" + pwd, Toast.LENGTH_SHORT)
 				.show();
-		try {
-			HttpConnection conn = new HttpConnectionPost(
-					new CaulHttpFilterChain());
-			CaulRequest request = new CaulRequest();
-			CaulResponse response = new CaulResponse();
-			request.setPostData(new ConcurrentHashMap<String, String>());
-			request.setUri(CachedUtils.getConfigValue("SERVERPATH")+CachedUtils.getConfigValue("URL_GETTOKEN"));
-			request.setCharset("UTF-8");
-			request.setTimeout(10000);
-			request.getPostData().put("un", un);
-			request.getPostData().put("pwd", pwd);
-			conn.sendData(request, response);
-			StringBuffer sb = HttpConnectionUtil.getResponseBody(
-					response.getResponse(), "UTF-8");
-			Toast.makeText(this, sb.toString(), Toast.LENGTH_LONG).show();
-		} catch (Exception e) {
-			Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
-		}
+		CachedUtils.getThreadPoolExecutor().submit(new Callable<Object>() {
+
+			@Override
+			public Object call() throws Exception {
+				try {
+					HttpConnection conn = new HttpConnectionPost(
+							new CaulHttpFilterChain());
+					CaulRequest request = new CaulRequest();
+					CaulResponse response = new CaulResponse();
+					request.setPostData(new ConcurrentHashMap<String, String>());
+					request.setUri(CachedUtils.getConfigValue("SERVERPATH")
+							+ CachedUtils.getConfigValue("URL_GETTOKEN"));
+					request.setCharset("UTF-8");
+					request.setTimeout(10000);
+					request.getPostData().put("un", un);
+					request.getPostData().put("pwd", pwd);
+					conn.sendData(request, response);
+					StringBuffer sb = HttpConnectionUtil.getResponseBody(
+							response.getResponse(), "UTF-8");
+					Toast.makeText(LogonActivity.this, sb.toString(),
+							Toast.LENGTH_LONG).show();
+				} catch (Exception e) {
+					Toast.makeText(LogonActivity.this, e.getMessage(),
+							Toast.LENGTH_LONG).show();
+				}
+				return null;
+			}
+		});
+
 	}
 
 	@Override
