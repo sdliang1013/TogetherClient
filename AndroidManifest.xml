@@ -9,12 +9,15 @@
         android:targetSdkVersion="15" />
 
     <application
+        android:name="com.caul.android.application.CaulApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity android:name="com.caul.android.togetherclient.MainActivity" 
-            android:label="@string/app_name">
+        <activity
+            android:name="com.caul.android.togetherclient.MainActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,11 +25,13 @@
             </intent-filter>
         </activity>
         <!-- 配置跳转activity -->
-        <activity android:name="com.caul.android.togetherclient.swim.SwimActivity" 
-            android:label="@string/title_swim">
+        <activity
+            android:name="com.caul.android.togetherclient.swim.SwimActivity"
+            android:label="@string/title_swim" >
         </activity>
-        <activity android:name="com.caul.android.togetherclient.pinche.PincheActivity" 
-            android:label="@string/title_pinche">
+        <activity
+            android:name="com.caul.android.togetherclient.pinche.PincheActivity"
+            android:label="@string/title_pinche" >
         </activity>
     </application>
 

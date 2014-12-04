@@ -9,6 +9,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -26,18 +27,32 @@ import android.net.http.AndroidHttpClient;
 public class HttpConnectionUtil {
 
 	/**
+	 * 
+	 * @param httpResponse
+	 * @param charset
+	 * @return
+	 * @throws ParseException
+	 * @throws IOException
+	 */
+	public static StringBuffer getResponseBody(HttpResponse httpResponse, String charset) throws ParseException,
+			IOException {
+		HttpEntity entity = httpResponse.getEntity(); // 获取响应里面的内容
+		// InputStream is = entity.getContent(); // 得到服务气端发回的响应的内容（都在一个流里面）
+		// 得到服务气端发回的响应的内容（都在一个字符串里面）
+		return new StringBuffer(EntityUtils.toString(entity, charset));
+	}
+	
+	/**
 	 * http get 调用
 	 * 
 	 * @param uri
 	 *            地址
-	 * @param charset
-	 *            编码
 	 * @param timeout
 	 *            超时
 	 * @return
 	 * @throws IOException
 	 */
-	public static StringBuffer get(String uri, String charset, int timeout) throws IOException {
+	public static HttpResponse get(String uri, int timeout) throws IOException {
 		try {
 			HttpParams httpParams = new BasicHttpParams();
 			HttpConnectionParams.setConnectionTimeout(httpParams, timeout); // 设置连接超时
@@ -48,10 +63,7 @@ public class HttpConnectionUtil {
 			if (httpResponse.getStatusLine().getStatusCode() != 200) {
 				throw new IOException("网络错误异常,请检查！" + uri);
 			}
-			HttpEntity entity = httpResponse.getEntity(); // 获取响应里面的内容
-			// InputStream is = entity.getContent(); // 得到服务气端发回的响应的内容（都在一个流里面）
-			// 得到服务气端发回的响应的内容（都在一个字符串里面）
-			return new StringBuffer(EntityUtils.toString(entity, charset));
+			return httpResponse;
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException(e.getMessage(), e);
 		} catch (ClientProtocolException e) {
@@ -66,18 +78,17 @@ public class HttpConnectionUtil {
 	 *            地址
 	 * @param postData
 	 *            请求数据
-	 * @param charset
-	 *            编码
 	 * @param timeout
 	 *            超时
 	 * @return
 	 * @throws IOException
 	 */
-	public static StringBuffer post(String uri, Map<String, String> postData, String charset, int timeout)
-			throws IOException {
+	public static HttpResponse post(String uri, Map<String, String> postData, int timeout) throws IOException {
 		List<NameValuePair> dataList = new CopyOnWriteArrayList<NameValuePair>();
-		for (String key : postData.keySet()) {
-			dataList.add(new BasicNameValuePair(key, postData.get(key)));
+		if(postData != null){
+			for (String key : postData.keySet()) {
+				dataList.add(new BasicNameValuePair(key, postData.get(key)));
+			}
 		}
 		try {
 			HttpParams httpParams = new BasicHttpParams();
@@ -93,10 +104,7 @@ public class HttpConnectionUtil {
 			if (httpResponse.getStatusLine().getStatusCode() != 200) {
 				throw new IOException("网络错误异常,请检查！" + uri);
 			}
-			HttpEntity entity = httpResponse.getEntity(); // 获取响应里面的内容
-			// InputStream is = entity.getContent(); // 得到服务气端发回的响应的内容（都在一个流里面）
-			// 得到服务气端发回的响应的内容（都在一个字符串里面）
-			return new StringBuffer(EntityUtils.toString(entity, charset));
+			return httpResponse;
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException(e.getMessage(), e);
 		} catch (ClientProtocolException e) {

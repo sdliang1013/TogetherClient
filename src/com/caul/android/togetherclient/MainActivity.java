@@ -15,6 +15,7 @@ import android.widget.Toast;
 import android.widget.ViewSwitcher.ViewFactory;
 
 import com.caul.android.components.switcher.CaulImageSwitcher;
+import com.caul.android.togetherclient.init.AppInit;
 
 public class MainActivity extends FragmentActivity implements ViewFactory, OnTouchListener {
 
@@ -34,6 +35,7 @@ public class MainActivity extends FragmentActivity implements ViewFactory, OnTou
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		AppInit.initApp(savedInstanceState, this);//初始化
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
